@@ -27,9 +27,9 @@ abstract class AnimalTable {
         <thead>
           <tr>
             <th>Species</th>
-            <th>Name <button class="btn btn-sm btn-light" onclick="sortTable('${this.containerId}', 'name')">Sort</button></th>
-            <th>Size <button class="btn btn-sm btn-light" onclick="sortTable('${this.containerId}', 'size')">Sort</button></th>
-            <th>Location <button class="btn btn-sm btn-light" onclick="sortTable('${this.containerId}', 'location')">Sort</button></th>
+            <th>Name ${this.data[0].species === "Big Cats" || this.data[0].species === "Dog" ? `<button class="btn btn-sm btn-light" onclick="sortTable('${this.containerId}', 'name')">Sort</button>` : ""}</th>
+            <th>Size ${this.data[0].species === "Big Cats" || this.data[0].species === "Big Fish" ? `<button class="btn btn-sm btn-light" onclick="sortTable('${this.containerId}', 'size')">Sort</button>` : ""}</th>
+            <th>Location ${this.data[0].species === "Big Cats" || this.data[0].species === "Dog" ? `<button class="btn btn-sm btn-light" onclick="sortTable('${this.containerId}', 'location')">Sort</button>` : ""}</th>
             <th>Image</th>
             <th>Actions</th>
           </tr>
@@ -78,8 +78,9 @@ abstract class AnimalTable {
     this.renderTable();
   }
 
-  sortTable(column: keyof Animal, descending: boolean) {
+  sortTable(column: keyof Animal, descending?: boolean) {
     this.data.sort((a, b) => {
+      descending = column === "name" || column === "location" ? true : false;
       const aValue = column === "size" ? parseFloat(a[column]) : a[column].toLowerCase();
       const bValue = column === "size" ? parseFloat(b[column]) : b[column].toLowerCase();
 
@@ -126,15 +127,15 @@ const bigCatsData: Animal[] = [
 const dogsData: Animal[] = [
   { species: "Dog", name: "Rottweiler", size: "2", location: "Germany", image: "./assets/images/rotwailer.png" },
   { species: "Dog", name: "German Shepherd", size: "2", location: "Germany", image: "./assets/images/german_shepherd.png" },
-  { species: "Dog", name: "Labrodar", size: "5", location: "UK", image: "./assets/images/labrodar.png" },
-  { species: "Dog", name: "Alabai", size: "10", location: "Turkey", image: "./assets/images/alabai.png" },
+  { species: "Dog", name: "Labrodar", size: "2", location: "UK", image: "./assets/images/labrodar.png" },
+  { species: "Dog", name: "Alabai", size: "4", location: "Turkey", image: "./assets/images/alabai.png" },
 ];
 
 const bigFishData: Animal[] = [
   { species: "Big Fish", name: "Humpback Whale", size: "15", location: "Atlantic Ocean", image: "./assets/images/humpback_whale.png" },
   { species: "Big Fish", name: "Killer Whale", size: "12", location: "Atlantic Ocean", image: "./assets/images/killer_whale.png" },
   { species: "Big Fish", name: "Tiger Shark", size: "8", location: "Ocean", image: "./assets/images/tiger_shark.png" },
-  { species: "Big Fish", name: "Hammerhead Shark", size: "20", location: "Ocean", image: "./assets/images/hammerhead_shark.png" },
+  { species: "Big Fish", name: "Hammerhead Shark", size: "8", location: "Ocean", image: "./assets/images/hammerhead_shark.png" },
 ];
 
 // Instantiate tables
@@ -234,5 +235,5 @@ form.addEventListener("submit", (e) => {
     "big-fish-table": bigFishTable,
   };
   const table = tableMap[containerId];
-  if (table) table.sortTable(column, false);
+  if (table) table.sortTable(column);
 };

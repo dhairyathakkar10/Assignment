@@ -25,7 +25,7 @@ var AnimalTable = /** @class */ (function () {
         var container = document.getElementById(this.containerId);
         if (!container)
             return;
-        container.innerHTML = "\n      <table class=\"table table-bordered\">\n        <thead>\n          <tr>\n            <th>Species</th>\n            <th>Name <button class=\"btn btn-sm btn-light\" onclick=\"sortTable('".concat(this.containerId, "', 'name')\">Sort</button></th>\n            <th>Size <button class=\"btn btn-sm btn-light\" onclick=\"sortTable('").concat(this.containerId, "', 'size')\">Sort</button></th>\n            <th>Location <button class=\"btn btn-sm btn-light\" onclick=\"sortTable('").concat(this.containerId, "', 'location')\">Sort</button></th>\n            <th>Image</th>\n            <th>Actions</th>\n          </tr>\n        </thead>\n        <tbody>\n          ").concat(this.data
+        container.innerHTML = "\n      <table class=\"table table-bordered\">\n        <thead>\n          <tr>\n            <th>Species</th>\n            <th>Name ".concat(this.data[0].species === "Big Cats" || this.data[0].species === "Dog" ? "<button class=\"btn btn-sm btn-light\" onclick=\"sortTable('".concat(this.containerId, "', 'name')\">Sort</button>") : "", "</th>\n            <th>Size ").concat(this.data[0].species === "Big Cats" || this.data[0].species === "Big Fish" ? "<button class=\"btn btn-sm btn-light\" onclick=\"sortTable('".concat(this.containerId, "', 'size')\">Sort</button>") : "", "</th>\n            <th>Location ").concat(this.data[0].species === "Big Cats" || this.data[0].species === "Dog" ? "<button class=\"btn btn-sm btn-light\" onclick=\"sortTable('".concat(this.containerId, "', 'location')\">Sort</button>") : "", "</th>\n            <th>Image</th>\n            <th>Actions</th>\n          </tr>\n        </thead>\n        <tbody>\n          ").concat(this.data
             .map(function (animal, index) { return "\n            <tr>\n              <td>".concat(animal.species, "</td>\n              <td class=\"").concat(_this.getNameClass(), "\">").concat(animal.name, "</td>\n              <td>").concat(animal.size, " ft</td>\n              <td>").concat(animal.location, "</td>\n              <td>\n                <img src=\"").concat(animal.image, "\" alt=\"").concat(animal.name, "\" />\n              </td>\n              <td>\n                <button class=\"btn btn-warning btn-sm\" onclick=\"editAnimal('").concat(_this.containerId, "', ").concat(index, ")\">Edit</button>\n                <button class=\"btn btn-danger btn-sm\" onclick=\"deleteAnimal('").concat(_this.containerId, "', ").concat(index, ")\">Delete</button>\n              </td>\n            </tr>\n          "); })
             .join(""), "\n        </tbody>\n      </table>\n    ");
     };
@@ -47,6 +47,7 @@ var AnimalTable = /** @class */ (function () {
     };
     AnimalTable.prototype.sortTable = function (column, descending) {
         this.data.sort(function (a, b) {
+            descending = column === "name" || column === "location" ? true : false;
             var aValue = column === "size" ? parseFloat(a[column]) : a[column].toLowerCase();
             var bValue = column === "size" ? parseFloat(b[column]) : b[column].toLowerCase();
             if (aValue < bValue)
@@ -206,5 +207,5 @@ window.sortTable = function (containerId, column) {
     };
     var table = tableMap[containerId];
     if (table)
-        table.sortTable(column, false);
+        table.sortTable(column);
 };
