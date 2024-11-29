@@ -21,21 +21,21 @@
       <h2>Add/Edit Animal</h2>
       <form id="animal-form" class="row g-3">
         <div class="col-md-4">
-          <button class="btn btn-secondary dropdown-toggle w-100 dropdown-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown button</button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Big Cats</a>
-            <a class="dropdown-item" href="#">Dog</a>
-            <a class="dropdown-item" href="#">Big Fish</a>
+          <button class="btn btn-secondary dropdown-toggle w-100 dropdown-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="species_btn">Select a Specie</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="species">
+            <span class="dropdown-item">Big Cats</span>
+            <span class="dropdown-item">Dog</span>
+            <span class="dropdown-item">Big Fish</span>
           </div>
         </div>
         <div class="col-md-4">
-          <input type="text" id="name" class="form-control" placeholder="Name" required />
+          <input type="text" id="name" class="form-control" placeholder="Name" />
         </div>
         <div class="col-md-4">
-          <input type="text" id="size" class="form-control" placeholder="Size (ft)" required />
+          <input type="text" id="size" class="form-control" placeholder="Size (ft)" />
         </div>
         <div class="col-md-4">
-          <input type="text" id="location" class="form-control" placeholder="Location" required />
+          <input type="text" id="location" class="form-control" placeholder="Location" />
         </div>
         <div class="col-md-4">
           <button type="submit" class="btn btn-primary w-100">Add/Update</button>
@@ -44,6 +44,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/4.8.4/typescript.min.js"></script>
-    <script src="script.js" type="module"></script>
+    <!-- <script type="text/typescript" src="./index.ts"></script> -->
+    <script src="index.js" type="module"></script>
   </body>
 </html>
