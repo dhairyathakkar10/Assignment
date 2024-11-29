@@ -97,7 +97,7 @@ abstract class AnimalTable {
 
 class BigCatsTable extends AnimalTable {
   getNameClass(): string {
-    return "bold";
+    return "";
   }
 }
 
@@ -131,7 +131,7 @@ const dogsData: Animal[] = [
 ];
 
 const bigFishData: Animal[] = [
-  { species: "Big Fish", name: "Humpback Whale", size: "15", location: "Atlantic Ocean", image: "./assets/images/hammerhead_shark.png" },
+  { species: "Big Fish", name: "Humpback Whale", size: "15", location: "Atlantic Ocean", image: "./assets/images/humpback_whale.png" },
   { species: "Big Fish", name: "Killer Whale", size: "12", location: "Atlantic Ocean", image: "./assets/images/killer_whale.png" },
   { species: "Big Fish", name: "Tiger Shark", size: "8", location: "Ocean", image: "./assets/images/tiger_shark.png" },
   { species: "Big Fish", name: "Hammerhead Shark", size: "20", location: "Ocean", image: "./assets/images/hammerhead_shark.png" },
@@ -145,25 +145,23 @@ let selectedSpecies: string | null = null;
 
 //Dropdown handler
 const speciesElem = document.getElementById("species");
+const dropdownBtn = document.getElementById("species_btn");
 speciesElem?.firstElementChild?.addEventListener("click", (e) => {
   e.preventDefault();
-  if (document.getElementById("species_btn")) {
-    document.getElementById("species_btn").innerText = "Big Cats";
-  }
+  if (!dropdownBtn) return;
+  dropdownBtn.innerText = "Big Cats";
   selectedSpecies = "Big Cats";
 });
 speciesElem?.children[1]?.addEventListener("click", (e) => {
   e.preventDefault();
-  if (document.getElementById("species_btn")) {
-    document.getElementById("species_btn").innerText = "Dog";
-  }
+  if (!dropdownBtn) return;
+  dropdownBtn.innerText = "Dog";
   selectedSpecies = "Dog";
 });
 speciesElem?.children[2]?.addEventListener("click", (e) => {
   e.preventDefault();
-  if (document.getElementById("species_btn")) {
-    document.getElementById("species_btn").innerText = "Big Fish";
-  }
+  if (!dropdownBtn) return;
+  dropdownBtn.innerText = "Big Fish";
   selectedSpecies = "Big Fish";
 });
 
@@ -177,7 +175,7 @@ form.addEventListener("submit", (e) => {
   const name = (document.getElementById("name") as HTMLInputElement).value.trim();
   const size = (document.getElementById("size") as HTMLInputElement).value.trim();
   const location = (document.getElementById("location") as HTMLInputElement).value.trim();
-  const image = species === "Big Cats" ? "./assets/images/tiger.png" : species === "Dog" ? "./assets/images/rotwailer.png" : "./assets/images/hammerhead_shark.png";
+  const image = species === "Big Cats" ? "./assets/images/tiger.png" : species === "Dog" ? "./assets/images/rotwailer.png" : "./assets/images/humpback_whale.png";
 
   const newAnimal: Animal = { species, name, size, location, image };
 
@@ -194,9 +192,9 @@ form.addEventListener("submit", (e) => {
     default:
       alert("Unknown species! Please use 'Big Cats', 'Dog', or 'Big Fish'");
   }
-  if (document.getElementById("species_btn")) {
-    document.getElementById("species_btn").innerText = "Select a Specie";
-  }
+  const dropdownBtn = document.getElementById("species_btn");
+  if (!dropdownBtn) return;
+  dropdownBtn.innerText = "Select a Specie";
   form.reset();
 });
 

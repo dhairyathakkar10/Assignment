@@ -68,7 +68,7 @@ var BigCatsTable = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     BigCatsTable.prototype.getNameClass = function () {
-        return "bold";
+        return "";
     };
     return BigCatsTable;
 }(AnimalTable));
@@ -108,7 +108,7 @@ var dogsData = [
     { species: "Dog", name: "Alabai", size: "10", location: "Turkey", image: "./assets/images/alabai.png" },
 ];
 var bigFishData = [
-    { species: "Big Fish", name: "Humpback Whale", size: "15", location: "Atlantic Ocean", image: "./assets/images/hammerhead_shark.png" },
+    { species: "Big Fish", name: "Humpback Whale", size: "15", location: "Atlantic Ocean", image: "./assets/images/humpback_whale.png" },
     { species: "Big Fish", name: "Killer Whale", size: "12", location: "Atlantic Ocean", image: "./assets/images/killer_whale.png" },
     { species: "Big Fish", name: "Tiger Shark", size: "8", location: "Ocean", image: "./assets/images/tiger_shark.png" },
     { species: "Big Fish", name: "Hammerhead Shark", size: "20", location: "Ocean", image: "./assets/images/hammerhead_shark.png" },
@@ -120,25 +120,26 @@ var bigFishTable = new BigFishTable(bigFishData, "big-fish-table");
 var selectedSpecies = null;
 //Dropdown handler
 var speciesElem = document.getElementById("species");
+var dropdownBtn = document.getElementById("species_btn");
 (_a = speciesElem === null || speciesElem === void 0 ? void 0 : speciesElem.firstElementChild) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function (e) {
     e.preventDefault();
-    if (document.getElementById("species_btn")) {
-        document.getElementById("species_btn").innerText = "Big Cats";
-    }
+    if (!dropdownBtn)
+        return;
+    dropdownBtn.innerText = "Big Cats";
     selectedSpecies = "Big Cats";
 });
 (_b = speciesElem === null || speciesElem === void 0 ? void 0 : speciesElem.children[1]) === null || _b === void 0 ? void 0 : _b.addEventListener("click", function (e) {
     e.preventDefault();
-    if (document.getElementById("species_btn")) {
-        document.getElementById("species_btn").innerText = "Dog";
-    }
+    if (!dropdownBtn)
+        return;
+    dropdownBtn.innerText = "Dog";
     selectedSpecies = "Dog";
 });
 (_c = speciesElem === null || speciesElem === void 0 ? void 0 : speciesElem.children[2]) === null || _c === void 0 ? void 0 : _c.addEventListener("click", function (e) {
     e.preventDefault();
-    if (document.getElementById("species_btn")) {
-        document.getElementById("species_btn").innerText = "Big Fish";
-    }
+    if (!dropdownBtn)
+        return;
+    dropdownBtn.innerText = "Big Fish";
     selectedSpecies = "Big Fish";
 });
 // Form handlers
@@ -149,7 +150,7 @@ form.addEventListener("submit", function (e) {
     var name = document.getElementById("name").value.trim();
     var size = document.getElementById("size").value.trim();
     var location = document.getElementById("location").value.trim();
-    var image = species === "Big Cats" ? "./assets/images/tiger.png" : species === "Dog" ? "./assets/images/rotwailer.png" : "./assets/images/hammerhead_shark.png";
+    var image = species === "Big Cats" ? "./assets/images/tiger.png" : species === "Dog" ? "./assets/images/rotwailer.png" : "./assets/images/humpback_whale.png";
     var newAnimal = { species: species, name: name, size: size, location: location, image: image };
     switch (species.toLowerCase()) {
         case "big cats":
@@ -164,9 +165,10 @@ form.addEventListener("submit", function (e) {
         default:
             alert("Unknown species! Please use 'Big Cats', 'Dog', or 'Big Fish'");
     }
-    if (document.getElementById("species_btn")) {
-        document.getElementById("species_btn").innerText = "Select a Specie";
-    }
+    var dropdownBtn = document.getElementById("species_btn");
+    if (!dropdownBtn)
+        return;
+    dropdownBtn.innerText = "Select a Specie";
     form.reset();
 });
 // Global handlers
